@@ -40,12 +40,32 @@ def print_formatted(data):
     if data['results']:
         item = data['results'][0]
 
-        # Displaying the PAC name as ASCII art
+        # Displaying the PAC name as ASCII art for each word or combined words
         pac_name = item.get('committee_name', 'N/A')
-        pac_name_art = text2art(pac_name, font='tarty2')  # You can choose different fonts
+        pac_name_words = pac_name.split()
+        longest_word_length = max(len(word) for word in pac_name_words)
 
-        # Print the ASCII art and the committee details
-        print(pac_name_art)
+        # Combine words if their combined length does not exceed the longest word length
+        combined_words = []
+        i = 0
+        while i < len(pac_name_words):
+            current_word = pac_name_words[i]
+            next_word = pac_name_words[i + 1] if i + 1 < len(pac_name_words) else ''
+            combined_length = len(current_word) + len(next_word) + 1  # +1 for space
+
+            if combined_length <= longest_word_length:
+                combined_words.append(current_word + ' ' + next_word)
+                i += 2
+            else:
+                combined_words.append(current_word)
+                i += 1
+
+        # Print ASCII art for each combined word
+        for combined_word in combined_words:
+            word_art = text2art(combined_word, font='tarty2')  # You can choose different fonts
+            print(word_art)
+
+        # Print the committee details
         print(f"{Fore.GREEN}{item.get('committee_type_full', 'N/A')}{Style.RESET_ALL}")
         print(f"{Fore.BLUE}Treasurer:{Style.RESET_ALL} {Fore.CYAN}{item.get('treasurer_name', 'N/A')}{Style.RESET_ALL}")
         print(f"{Fore.WHITE}---------------------------------{Style.RESET_ALL}")
@@ -62,6 +82,7 @@ def print_formatted(data):
         print(f"{Fore.BLUE}Last Debts Owed By Committee:{Style.RESET_ALL} {Fore.CYAN}{format_number(item.get('last_debts_owed_by_committee', 'N/A'))}{Style.RESET_ALL}")
         print(f"{Fore.BLUE}Last Debts Owed To Committee:{Style.RESET_ALL} {Fore.CYAN}{format_number(item.get('last_debts_owed_to_committee', 'N/A'))}{Style.RESET_ALL}")
         print(f"{Fore.BLUE}Independent Expenditures:{Style.RESET_ALL} {Fore.CYAN}{format_number(item.get('independent_expenditures', 'N/A'))}{Style.RESET_ALL}")
+
 
 def main():
     api_key = get_api_key()
