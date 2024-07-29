@@ -1,6 +1,7 @@
 import requests
 from colorama import init, Fore, Style
 from datetime import datetime
+from art import text2art
 import sys
 
 init(autoreset=True)
@@ -39,10 +40,14 @@ def print_formatted(data):
     if data['results']:
         item = data['results'][0]
 
-        # Displaying only the specified items with colored keys and values
-        print(f"{Fore.GREEN}{item.get('committee_name', 'N/A')}{Style.RESET_ALL}")
+        # Displaying the PAC name as ASCII art
+        pac_name = item.get('committee_name', 'N/A')
+        pac_name_art = text2art(pac_name, font='tarty2')  # You can choose different fonts
+
+        # Print the ASCII art and the committee details
+        print(pac_name_art)
         print(f"{Fore.GREEN}{item.get('committee_type_full', 'N/A')}{Style.RESET_ALL}")
-        print(f"{Fore.BLUE}Treasurer:{Style.RESET_ALL} {Fore.CYAN}{item.get('treasurer_name', 'N/A')}{Style.RESET_ALL}")        
+        print(f"{Fore.BLUE}Treasurer:{Style.RESET_ALL} {Fore.CYAN}{item.get('treasurer_name', 'N/A')}{Style.RESET_ALL}")
         print(f"{Fore.WHITE}---------------------------------{Style.RESET_ALL}")
         print(f"{Fore.YELLOW}Scope{Style.RESET_ALL}")
         print(f"{Fore.BLUE}Filing Frequency:{Style.RESET_ALL} {Fore.CYAN}{item.get('filing_frequency_full', 'N/A')}{Style.RESET_ALL}")
