@@ -17,7 +17,7 @@ https://github.com/user-attachments/assets/91c68370-02fa-4889-b5ed-c450e4a64905
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/fecfetch.git
+   git clone https://github.com/pdennis/fecfetch.git
    cd fecfetch
    ```
 
