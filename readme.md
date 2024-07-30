@@ -3,7 +3,8 @@
 Fecfetch is a Python script inspired by the system information tool Neofetch. It's silly and pointless, but I wanted an excuse to get familiar with the openFEC API. This tool fetches and displays information about a chosen American federal campaign committee using the Federal Election Commission (FEC) API. The script provides a summary of a committee's financials and other details, presented in an ASCII art style.
 
 
-https://github.com/user-attachments/assets/91c68370-02fa-4889-b5ed-c450e4a64905
+![image](https://github.com/user-attachments/assets/580db31b-0be7-4610-a1e8-8d892badb60e)
+
 
 
 ## Features
